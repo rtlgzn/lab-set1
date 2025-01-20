@@ -1,5 +1,3 @@
-# lab-set1
-Repository for Lab 1 submission for BTP605.
 # Lab 1: Code Reading and Tool Modification
 
 ## Code Reading
