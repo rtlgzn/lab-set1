@@ -1,3 +1,56 @@
+# Lab 1: Code Reading and Tool Modification
+
+## Objectives
+- Learn to read source code.
+- Understand the basics of OBS Studio (or another video capture software).
+- Modify an open-source project by adding a custom flag and verifying its functionality.
+
+---
+
+## Code Reading (15 Marks)
+
+### Selected Projects
+1. [NAnt](https://github.com/nant/nant)
+2. [Apache Ant](https://github.com/apache/ant)
+
+### Questions and Answers
+
+1. **List of files examined and explanation:**
+   - **NAnt:**
+     - `CommandLineBuilder.cs`: Handles command-line arguments. This file was chosen for its role in argument processing.
+     - `Program.cs`: The program's entry point, where command-line arguments are parsed and processed.
+   - **Ant:**
+     - `CommandLineParser.java`: Responsible for parsing command-line arguments in Ant. Selected for its core role in argument handling.
+     - `Main.java`: Entry point of the program, which invokes methods from `CommandLineParser`.
+
+2. **First impressions:**
+   - **NAnt:** The code is structured and readable. However, there are limited comments for error handling.
+   - **Ant:** Slightly more complex due to Java's verbose syntax, with nested classes and extensive method chaining.
+
+3. **Code organization:**
+   - **NAnt:**
+     - **Method level:** Argument processing occurs in `Parse()` in `CommandLineBuilder`.
+     - **Class level:** `CommandLineBuilder` encapsulates argument processing logic.
+     - **Project level:** `Program.cs` coordinates argument parsing and program execution.
+   - **Ant:**
+     - **Method level:** `parseArguments()` in `CommandLineParser` handles command-line arguments.
+     - **Class level:** `CommandLineParser` is the central class for parsing logic.
+     - **Project level:** `Main.java` serves as the entry point and integrates parsed arguments into the program's execution.
+
+4. **How are invalid filenames handled?**
+   - **NAnt:** Throws an `ArgumentException` with an appropriate error message.
+   - **Ant:** Uses a `try-catch` block to handle `IllegalArgumentException`, logging the error before exiting gracefully.
+
+5. **Two similarities:**
+   - Both projects isolate argument parsing into dedicated classes for modularity.
+   - Arguments flow from the entry point (e.g., `Program.cs` or `Main.java`) to specialized parsing methods.
+
+6. **Two differences:**
+   - **Language:** NAnt is written in C#, while Ant uses Java, resulting in different syntax and patterns.
+   - **Error Handling:** NAnt uses direct exceptions, whereas Ant logs errors and processes them in `Main`.
+
+---
+
 ## Tool Modification (5 Marks)
 
 ### Selected Tool for Modification
