@@ -43,3 +43,55 @@
    - NAnt throws exceptions directly, while Ant logs errors and processes them in `Main`.
 
 ---
+
+## Tool Modification
+
+### Selected Tool for Modification
+- **NAnt**
+
+### Steps
+1. **Build the Tool:**
+   - Ensure .NET SDK is installed.
+   - In the project root folder, run:
+     ```bash
+     dotnet build
+     ```
+
+2. **Create a "Hello World" Program:**
+   - Create `hello.cs`:
+     ```csharp
+     using System;
+     class HelloWorld {
+         static void Main() {
+             Console.WriteLine("Hello, World!");
+         }
+     }
+     ```
+   - Create `build.xml`:
+     ```xml
+     <project name="HelloWorld" default="build">
+         <target name="build">
+             <csc target="exe" output="hello.exe">
+                 <sources>
+                     <include name="hello.cs"/>
+                 </sources>
+             </csc>
+         </target>
+     </project>
+     ```
+
+3. **Add a Custom Flag:**
+   - In `CommandLineBuilder.cs`, add:
+     ```csharp
+     if (args.Contains("--ari")) {
+         Console.WriteLine("BTP605 - Ari");
+     }
+     ```
+   - Call this code in `Program.cs` after parsing arguments.
+
+4. **Rebuild the Tool:**
+   - Use the same build command:
+     ```bash
+     dotnet build
+     ```
+
