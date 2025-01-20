@@ -1,64 +1,16 @@
-# Lab 1: Code Reading and Tool Modification
-
-## Code Reading
-
-### Selected Projects
-1. [NAnt](https://github.com/nant/nant)
-2. [Apache Ant](https://github.com/apache/ant)
-
-### Questions and Answers
-
-1. **List of files examined and explanation:**
-   - **NAnt:**
-     - `CommandLineBuilder.cs` — Handles command-line arguments. Chosen for its relevance to argument processing.
-     - `Program.cs` — Entry point of the program; processes arguments passed from the command line.
-   - **Ant:**
-     - `CommandLineParser.java` — Responsible for parsing command-line arguments.
-     - `Main.java` — Entry point of the program; invokes methods from `CommandLineParser`.
-
-2. **First impressions:**
-   - **NAnt:** Clear structure, readable code, but limited comments for error handling.
-   - **Ant:** Slightly more complex due to Java’s formal syntax, with multiple nested classes.
-
-3. **Code organization:**
-   - **NAnt:**
-     - **Method level:** Handled in `CommandLineBuilder`.
-     - **Class level:** `CommandLineBuilder` processes and organizes argument parsing.
-     - **Project level:** `Program.cs` invokes the parsing methods.
-   - **Ant:**
-     - **Method level:** Processed in `parseArguments()` in `CommandLineParser`.
-     - **Class level:** `CommandLineParser` manages argument parsing.
-     - **Project level:** `Main` coordinates parsed arguments for execution.
-
-4. **Invalid filenames handling:**
-   - **NAnt:** Throws `ArgumentException` with an error message.
-   - **Ant:** Uses `try-catch` with `IllegalArgumentException` for error logging.
-
-5. **Two similarities:**
-   - Both projects isolate argument parsing into dedicated classes.
-   - Arguments flow from the entry point to specialized parsers.
-
-6. **Two differences:**
-   - NAnt uses C#, while Ant uses Java, affecting syntax and design patterns.
-   - NAnt throws exceptions directly, while Ant logs errors and processes them in `Main`.
-
----
-
-## Tool Modification
+## Tool Modification (5 Marks)
 
 ### Selected Tool for Modification
 - **NAnt**
 
 ### Steps
+
 1. **Build the Tool:**
-   - Ensure .NET SDK is installed.
-   - In the project root folder, run:
-     ```bash
-     dotnet build
-     ```
+   - Navigate to the root folder of the NAnt source files.
+   - Build the tool using a C# compiler or your development environment.
 
 2. **Create a "Hello World" Program:**
-   - Create `hello.cs`:
+   - **Source File:** `hello.cs`
      ```csharp
      using System;
      class HelloWorld {
@@ -67,7 +19,7 @@
          }
      }
      ```
-   - Create `build.xml`:
+   - **Build File:** `build.xml`
      ```xml
      <project name="HelloWorld" default="build">
          <target name="build">
@@ -81,17 +33,58 @@
      ```
 
 3. **Add a Custom Flag:**
-   - In `CommandLineBuilder.cs`, add:
+   - Modify `CommandLineBuilder.cs` to include:
      ```csharp
      if (args.Contains("--ari")) {
          Console.WriteLine("BTP605 - Ari");
      }
      ```
-   - Call this code in `Program.cs` after parsing arguments.
+   - Modify `Program.cs` to invoke this logic after parsing:
+     ```csharp
+     static void Main(string[] args) {
+         CommandLineBuilder builder = new CommandLineBuilder(args);
+         builder.Parse();
 
-4. **Rebuild the Tool:**
-   - Use the same build command:
-     ```bash
-     dotnet build
+         // Custom flag logic
+         if (args.Contains("--ari")) {
+             Console.WriteLine("BTP605 - Ari");
+         }
+     }
      ```
 
+4. **Rebuild the Tool:**
+   - Rebuild the project with the modified code.
+
+5. **Test the Tool:**
+   - Run the tool without the custom flag:
+     ```bash
+     nant
+     ```
+   - Run the tool with the `--ari` flag:
+     ```bash
+     nant --ari
+     ```
+   - Verify that it outputs:
+     ```
+     BTP605 - Ari
+     ```
+
+---
+
+## Video Demonstration
+Include a walkthrough video showing:
+1. The repository structure.
+2. Building and running the Hello World program without the `--ari` flag.
+3. Building and running the Hello World program with the `--ari` flag.
+4. A walkthrough of the changes made to the source code.
+
+[Video Link](https://your-video-link)
+
+---
+
+## Git Repository
+Ensure the repository contains:
+1. **Original Commit:** The unmodified NAnt source files.
+2. **Modified Commit:** The updated source code with the `--ari` flag.
+
+[GitHub Repository](https://github.com/rtlgzn/lab1-nant)
