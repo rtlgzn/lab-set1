@@ -131,7 +131,7 @@ Include a walkthrough video showing:
 3. Building and running the Hello World program with the `--ari` flag.
 4. A walkthrough of the changes made to the source code.
 
-[Video Link](https://your-video-link)
+[Video Link](https://youtu.be/KC2FXf6sMOc)
 
 ---
 
